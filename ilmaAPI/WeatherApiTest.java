@@ -8,10 +8,10 @@ import java.util.Enumeration;
 
 import static org.junit.Assert.assertEquals;
 
-public class ApiTest {
+public class WeatherApiTest {
 
     @Test
-    public void testNetworkInterfaceIsUp() {
+    public void testIfNetworkInterfaceIsUp() {
         Boolean networkInterface = false;
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
@@ -27,7 +27,7 @@ public class ApiTest {
     }
 
     @Test
-    public void testConnectionIsAvailable() {
+    public void testIfConnectionIsAvailable() {
         String connectionResponse;
         try {
             final URL url = new URL("http://www.google.com");
@@ -43,7 +43,7 @@ public class ApiTest {
     }
 
     @Test
-    public void testWebsiteIsAvailable() {
+    public void testIfWebsiteIsAvailable() {
         String connectionResponse;
         try {
             final URL url = new URL("https://openweathermap.org/");
@@ -59,7 +59,7 @@ public class ApiTest {
     }
 
     @Test
-    public void testApiIsAvailableForForecast() {
+    public void testIfApiIsAvailableForForecast() {
         String connectionResponse;
         try {
             final URL url = new URL("https://api.openweathermap.org/data/2.5/forecast?q=Tallinn,EE&appid=8ed7afa5f56fcd9ca49db9e458e97128&unit=metric");
@@ -75,7 +75,7 @@ public class ApiTest {
     }
 
     @Test
-    public void testApiIsAvailableForCoordinates() {
+    public void testIfApiIsAvailableForCoordinates() {
         String connectionResponse;
         try {
             final URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=Tallinn,EE&appid=8ed7afa5f56fcd9ca49db9e458e97128&unit=metric");
@@ -91,161 +91,179 @@ public class ApiTest {
     }
 
     @Test
-    public void jsonIsNotEmpty() {
+    public void testIfRequestedCityIsInParsedJson() {
         WeatherApi api = new WeatherApi();
-        String jsondata = api.jsonReader();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
+        assertEquals(api.cityGetter(jsondata).equals(city), true);
+    }
+
+    @Test
+    public void testIfJsonIsNotEmptyString() {
+        WeatherApi api = new WeatherApi();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
         assertEquals(jsondata.equals(""), false);
     }
 
     @Test
-    public void jsonIsNotNull() {
+    public void testIfJsonIsNotNull() {
         WeatherApi api = new WeatherApi();
-        String jsondata = api.jsonReader();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
         assertEquals(jsondata.equals(null), false);
     }
 
     @Test
-    public void temperatureIsNotEmpty() {
+    public void testIfTemperatureIsNotEmptyString() {
         WeatherApi api = new WeatherApi();
-        String jsondata = api.jsonReader();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
         String currentTemperature = api.getTemperature(jsondata);
         assertEquals(currentTemperature.equals(""), false);
     }
 
     @Test
-    public void temperatureIsNotNull() {
+    public void testIfTemperatureIsNotNull() {
         WeatherApi api = new WeatherApi();
-        String jsondata = api.jsonReader();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
         String currentTemperature = api.getTemperature(jsondata);
         assertEquals(currentTemperature.equals(null), false);
     }
 
     @Test
-    public void temperatureIsInFormatTrue() {
+    public void testIfTemperatureIsInCelsius() {
         WeatherApi api = new WeatherApi();
         assertEquals(api.temperatureStyleCheck("16 C"), true);
     }
 
     @Test
-    public void temperatureIsInFormatWrongSystem() {
+    public void testIfTemperatureIsNotInCelcius() {
         WeatherApi api = new WeatherApi();
         assertEquals(api.temperatureStyleCheck("16 K"), false);
     }
 
     @Test
-    public void temperatureFormatNoSpace() {
+    public void testIfTemperatureFormatHasNoSpace() {
         WeatherApi api = new WeatherApi();
         assertEquals(api.temperatureStyleCheck("16C"), false);
     }
 
     @Test
-    public void temperatureFormatWrongOrder() {
+    public void testIfTemperatureFormaIsIntWrongOrder() {
         WeatherApi api = new WeatherApi();
         assertEquals(api.temperatureStyleCheck("C 16"), false);
     }
 
     @Test
-    public void temperatureFormatRoundDegreeFull() {
+    public void testIfTemperatureRoundedFullDigit() {
         WeatherApi api = new WeatherApi();
         assertEquals(api.temperatureStyleCheck("15,9 C"), false);
     }
 
     @Test
-    public void maxTemperature() {
+    public void testIfGetMaxTemperature() {
         WeatherApi api = new WeatherApi();
-        String jsondata = api.jsonReader();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
         String maximumTemperature = api.getMaximumTemperature(jsondata);
         assertEquals(api.temperatureStyleCheck(maximumTemperature), true);
     }
 
     @Test
-    public void maxTemperatureNotNull() {
+    public void testIfMaxTemperatureNotNull() {
         WeatherApi api = new WeatherApi();
-        String jsondata = api.jsonReader();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
         String maximumTemperature = api.getMaximumTemperature(jsondata);
         assertEquals(maximumTemperature.equals(null), false);
     }
 
     @Test
-    public void maxTemperatureNotEmpty() {
+    public void testIfMaxTemperatureNotEmptyString() {
         WeatherApi api = new WeatherApi();
-        String jsondata = api.jsonReader();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
         String maximumTemperature = api.getMaximumTemperature(jsondata);
         assertEquals(maximumTemperature.equals(""), false);
     }
 
     @Test
-    public void minTemperature() {
+    public void testIfGetMinTemperature() {
         WeatherApi api = new WeatherApi();
-        String jsondata = api.jsonReader();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
         String minimumTemperature = api.getMinimumTemperature(jsondata);
         assertEquals(api.temperatureStyleCheck(minimumTemperature), true);
     }
 
     @Test
-    public void minTemperatureNotNull() {
+    public void testIfMinTemperatureNotNull() {
         WeatherApi api = new WeatherApi();
-        String jsondata = api.jsonReader();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
         String minimumTemperature = api.getMinimumTemperature(jsondata);
         assertEquals(minimumTemperature.equals(null), false);
     }
 
     @Test
-    public void minTemperatureNotEmpty() {
+    public void testIfMinTemperatureNotEmptyString() {
         WeatherApi api = new WeatherApi();
-        String jsondata = api.jsonReader();
+        String city = "Tallinn";
+        String jsondata = api.jsonReader(city);
         String minimumTemperature = api.getMinimumTemperature(jsondata);
         assertEquals(minimumTemperature.equals(""), false);
     }
 
     @Test
-    public void getCoordinatesTrue() {
+    public void testIfCoordinatesNotEmptyString() {
         WeatherApi api = new WeatherApi();
         String coordinatedata = api.coordinateReader();
-        String coordinates = api.getCoordinates(coordinatedata);
+        String coordinates = api.getCoordinatesFromJson(coordinatedata);
         assertEquals(coordinates.equals(""), false);
     }
 
     @Test
-    public void coordinatesNotNull() {
+    public void testIfCoordinatesNotNull() {
         WeatherApi api = new WeatherApi();
         String coordinatedata = api.coordinateReader();
-        String coordinates = api.getCoordinates(coordinatedata);
+        String coordinates = api.getCoordinatesFromJson(coordinatedata);
         assertEquals(coordinates.equals(null), false);
     }
 
     @Test
-    public void coordinateStyleOk() {
+    public void testIfCoordinateStyleIsXxxYyyFormat() {
         WeatherApi api = new WeatherApi();
         String coordinates = "123:212";
-        assertEquals(api.CoordinateStyleCheck(coordinates), true);
+        assertEquals(api.coordinateStyleCheck(coordinates), true);
     }
 
     @Test
-    public void coordinateStyleWord() {
+    public void testIfCoordinatesIsRandomWord() {
         WeatherApi api = new WeatherApi();
         String coordinates = "karu";
-        assertEquals(api.CoordinateStyleCheck(coordinates), false);
+        assertEquals(api.coordinateStyleCheck(coordinates), false);
     }
 
     @Test
-    public void coordinateStyleNoColon() {
+    public void testIfCoordinateStringHasNoColon() {
         WeatherApi api = new WeatherApi();
         String coordinates = "232312";
-        assertEquals(api.CoordinateStyleCheck(coordinates), false);
+        assertEquals(api.coordinateStyleCheck(coordinates), false);
     }
 
     @Test
-    public void coordinateStyleShort() {
+    public void testIfCoordinateStringIsShort() {
         WeatherApi api = new WeatherApi();
         String coordinates = "1231";
-        assertEquals(api.CoordinateStyleCheck(coordinates), false);
+        assertEquals(api.coordinateStyleCheck(coordinates), false);
     }
 
     @Test
-    public void coordinateStyleLong() {
+    public void testIfCoordinateStringIsLong() {
         WeatherApi api = new WeatherApi();
         String coordinates = "2322321:3131232";
-        assertEquals(api.CoordinateStyleCheck(coordinates), false);
+        assertEquals(api.coordinateStyleCheck(coordinates), false);
     }
 }
