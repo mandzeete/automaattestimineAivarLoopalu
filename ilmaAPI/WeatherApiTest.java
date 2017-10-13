@@ -144,7 +144,7 @@ public class WeatherApiTest {
     public void testIfMaxTemperatureNotNull() throws IOException{
         WeatherApi api = new WeatherApi("Tallinn");
         String jsondata = api.getForecastFor3Days();
-        String maximumTemperature = api.getMaximumTemperature(jsondata);
+        String maximumTemperature = api.getMaximumTemperature();
         assertEquals(maximumTemperature.equals(null), false);
     }
 
@@ -152,7 +152,7 @@ public class WeatherApiTest {
     public void testIfMaxTemperatureNotEmptyString() throws IOException{
         WeatherApi api = new WeatherApi("Tallinn");
         String jsondata = api.getForecastFor3Days();
-        String maximumTemperature = api.getMaximumTemperature(jsondata);
+        String maximumTemperature = api.getMaximumTemperature();
         assertEquals(maximumTemperature.equals(""), false);
     }
 
@@ -160,7 +160,7 @@ public class WeatherApiTest {
     public void testIfMinTemperatureNotNull() throws IOException{
         WeatherApi api = new WeatherApi("Tallinn");
         String jsondata = api.getForecastFor3Days();
-        String minimumTemperature = api.getMinimumTemperature(jsondata);
+        String minimumTemperature = api.getMinimumTemperature();
         assertEquals(minimumTemperature.equals(null), false);
     }
 
@@ -168,7 +168,7 @@ public class WeatherApiTest {
     public void testIfMinTemperatureNotEmptyString() throws IOException{
         WeatherApi api = new WeatherApi("Tallinn");
         String jsondata = api.getForecastFor3Days();
-        String minimumTemperature = api.getMinimumTemperature(jsondata);
+        String minimumTemperature = api.getMinimumTemperature();
         assertEquals(minimumTemperature.equals(""), false);
     }
 

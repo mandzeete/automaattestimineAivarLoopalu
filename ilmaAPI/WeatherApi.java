@@ -7,6 +7,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class WeatherApi {
     private String city;
@@ -48,12 +51,66 @@ public class WeatherApi {
         return Double.toString(temperatureInCelcius - 273.15) + " °C";
     }
 
-    public String getMaximumTemperature(String text) {
-        return "";
+    public String getMaximumTemperature() {
+        ArrayList<String> temperatures = new ArrayList<String>(Arrays.asList(forecastFor3Days.split("\"dt\":")));
+        ArrayList<String> temperatures2 = new ArrayList<String>();
+        for (int i = 0; i < 25; i++) {
+            temperatures2.add(temperatures.get(i));
+        }
+        temperatures.clear();
+        for (int i = 1; i < temperatures2.size(); i++) {
+            int placement = temperatures2.get(i).indexOf("\"temp_max\":");
+            temperatures.add(temperatures2.get(i).substring(placement + 11, placement + 18));
+        }
+        temperatures2.clear();
+        for (int i = 0; i < temperatures.size(); i++) {
+            String temperature = temperatures.get(i);
+            while (temperature.contains(",")) {
+                temperature = temperature.substring(0, temperature.indexOf(","));
+            }
+            temperatures2.add(temperature);
+        }
+        temperatures.clear();
+        double maximumTemperature = Double.parseDouble(temperatures2.get(0));
+        for (int i = 0; i < temperatures2.size(); i++) {
+            if (Double.parseDouble(temperatures2.get(i)) > maximumTemperature) {
+                maximumTemperature = Double.parseDouble(temperatures2.get(i));
+            }
+        }
+        maximumTemperature = maximumTemperature - 273.15;
+        double roundOff = (double) Math.round(maximumTemperature * 10) / 10;
+        return Double.toString(roundOff) + " °C";
     }
 
-    public String getMinimumTemperature(String text) {
-        return "";
+    public String getMinimumTemperature() {
+        ArrayList<String> temperatures = new ArrayList<String>(Arrays.asList(forecastFor3Days.split("\"dt\":")));
+        ArrayList<String> temperatures2 = new ArrayList<String>();
+        for (int i = 0; i < 25; i++) {
+            temperatures2.add(temperatures.get(i));
+        }
+        temperatures.clear();
+        for (int i = 1; i < temperatures2.size(); i++) {
+            int placement = temperatures2.get(i).indexOf("\"temp_min\":");
+            temperatures.add(temperatures2.get(i).substring(placement + 11, placement + 18));
+        }
+        temperatures2.clear();
+        for (int i = 0; i < temperatures.size(); i++) {
+            String temperature = temperatures.get(i);
+            while (temperature.contains(",")) {
+                temperature = temperature.substring(0, temperature.indexOf(","));
+            }
+            temperatures2.add(temperature);
+        }
+        temperatures.clear();
+        double maximumTemperature = Double.parseDouble(temperatures2.get(0));
+        for (int i = 0; i < temperatures2.size(); i++) {
+            if (Double.parseDouble(temperatures2.get(i)) < maximumTemperature) {
+                maximumTemperature = Double.parseDouble(temperatures2.get(i));
+            }
+        }
+        maximumTemperature = maximumTemperature - 273.15;
+        double roundOff = (double) Math.round(maximumTemperature * 10) / 10;
+        return Double.toString(roundOff) + " °C";
     }
 
     public String coordinateReader() {
