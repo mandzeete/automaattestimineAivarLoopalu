@@ -25,9 +25,9 @@ public class Filereader {
         }
         catch (Exception e)
         {
-            System.err.format("Exception occurred trying to read the file");
-            e.printStackTrace();
-            return null;
+            String name = InputScanner.getInput();
+            lines.add(name);
+            return lines;
         }
     }
 
