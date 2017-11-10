@@ -9,9 +9,9 @@ public class WeatherApi {
     private String forecastFor3Days;
 
     public WeatherApi(String name) throws IOException{
-        Connection connection = new Connection(name);
-        weatherDataWithCoordinates = connection.jsonReader("weather");
-        forecastFor3Days = connection.jsonReader("forecast");
+        JSONgetter JSONgetter = new JSONgetter(name);
+        weatherDataWithCoordinates = JSONgetter.jsonReader("weather");
+        forecastFor3Days = JSONgetter.jsonReader("forecast");
     }
 
     String getWeatherDataWithCoordinates() {
