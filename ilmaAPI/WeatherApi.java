@@ -14,11 +14,11 @@ public class WeatherApi {
         forecastFor3Days = JSONgetter.jsonReader("forecast");
     }
 
-    String getWeatherDataWithCoordinates() {
+    public String getWeatherDataWithCoordinates() {
         return weatherDataWithCoordinates;
     }
 
-    String getForecastFor3Days() {
+    public String getForecastFor3Days() {
         return forecastFor3Days;
     }
 
@@ -89,16 +89,9 @@ public class WeatherApi {
         return Double.toString(roundOff) + " °C";
     }
 
-    public String coordinateReader() {
-        return "";
-    }
-
-    public String getCoordinatesFromJson(String text) {
-        return "";
-    }
-
-    public boolean coordinateStyleCheck(String text) {
-        return false;
+    public String getCoordinates() {
+        String[] city = weatherDataWithCoordinates.split("weather")[0].split("\"");
+        return "Longitude: " + city[4].substring(1, city[4].length() - 1) + " Latitude: " + city[6].substring(1, city[6].length() - 2);
     }
 
     public String cityGetter() {

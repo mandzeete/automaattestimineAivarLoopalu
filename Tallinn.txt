@@ -1,3 +1,4 @@
-Tallinn: 5.0 °C
-Maximum temperature for 3 days: 6.0 °C
-Minimum temperature for 3 days: 3.2 °C
+Longitude: 24.75 Latitude: 59.44
+Tallinn: 2.0 °C
+Maximum temperature for 3 days: 4.5 °C
+Minimum temperature for 3 days: -0.7 °C

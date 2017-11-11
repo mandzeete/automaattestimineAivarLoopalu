@@ -1,3 +1,4 @@
-Tartu: 5.0 °C
-Maximum temperature for 3 days: 4.7 °C
-Minimum temperature for 3 days: 0.7 °C
+Longitude: 26.72 Latitude: 58.37
+Tartu: -2.0 °C
+Maximum temperature for 3 days: 1.1 °C
+Minimum temperature for 3 days: -10.0 °C

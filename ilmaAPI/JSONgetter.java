@@ -20,9 +20,9 @@ class JSONgetter {
         String jsonText = "";
         String line;
         String url = "https://api.openweathermap.org/data/2.5/" + mode + "?q=" + this.cityname + ",EE&appid=8ed7afa5f56fcd9ca49db9e458e97128&unit=metric";
-        try (InputStream is = new URL(url).openStream()) {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            while ((line = rd.readLine()) != null) {
+        try (InputStream stream = new URL(url).openStream()) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
+            while ((line = reader.readLine()) != null) {
                 jsonText += line;
             }
         }
