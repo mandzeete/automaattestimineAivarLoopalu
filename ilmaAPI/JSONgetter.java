@@ -10,11 +10,7 @@ import java.nio.charset.Charset;
 class JSONgetter {
     private String cityname;
     JSONgetter(String name) {
-        if (name == null || name.equals("")) {
-            this.cityname = InputScanner.getInput();
-        } else {
-            this.cityname = name;
-        }
+        this.cityname = name;
     }
     String jsonReader(String mode) throws IOException {
         String jsonText = "";

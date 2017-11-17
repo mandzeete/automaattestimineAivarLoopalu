@@ -114,14 +114,14 @@ public class WeatherApiTest {
     public void testIfWeatherJsonIsNotNull() throws IOException{
         WeatherApi api = new WeatherApi("Tallinn");
         String jsondata = api.getWeatherDataWithCoordinates();
-        assertEquals(jsondata.equals(null), false);
+        assertEquals(jsondata.length() < 1, false);
     }
 
     @Test
     public void testIfForecastJsonIsNotNull() throws IOException{
         WeatherApi api = new WeatherApi("Tallinn");
         String jsondata = api.getForecastFor3Days();
-        assertEquals(jsondata.equals(null), false);
+        assertEquals(jsondata.length() < 1, false);
     }
 
     @Test
