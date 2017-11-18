@@ -19,12 +19,13 @@ public class WeatherBrowser implements WeatherBrowserInterface{
             String maximumTemp = weatherApi.getMaximumTemperature();
             String minimumTemp = weatherApi.getMinimumTemperature();
 
+            filewritter.write(city);
             filewritter.write(weatherApi.getCoordinates());
-            filewritter.write(city + ": " + temperature);
             filewritter.write("Maximum temperature for 3 days: " + maximumTemp);
             filewritter.write("Minimum temperature for 3 days: " + minimumTemp);
+            filewritter.write("Temperature at the moment: " + temperature);
             filewritter.close();
-            
+
             System.out.println(weatherApi.getCoordinates());
             System.out.println(city + ": " + temperature);
             System.out.println("Maximum temperature for 3 days: " + maximumTemp);
