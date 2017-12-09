@@ -3,26 +3,14 @@ package ilmaAPI;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class WeatherApi {
     private String weatherDataWithCoordinates;
     private String forecastFor3Days;
 
-    public WeatherApi(String name) throws IOException{
-        JSONgetter JSONgetter = new JSONgetter(name);
-        weatherDataWithCoordinates = JSONgetter.jsonReader("weather");
-        forecastFor3Days = JSONgetter.jsonReader("forecast");
-    }
-
-    public WeatherApi() throws IOException {
-        System.out.println("Please enter the city name:");
-        Scanner scanner = new Scanner(System.in);
-        String city = scanner.next();
-        scanner.close();
-        JSONgetter JSONgetter = new JSONgetter(city);
-        weatherDataWithCoordinates = JSONgetter.jsonReader("weather");
-        forecastFor3Days = JSONgetter.jsonReader("forecast");
+    public WeatherApi(JSONgetter getter) throws IOException {
+        this.weatherDataWithCoordinates = getter.jsonReader("weather");
+        this.forecastFor3Days = getter.jsonReader("forecast");
     }
 
     public String getWeatherDataWithCoordinates() {

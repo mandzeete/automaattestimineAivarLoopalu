@@ -6,11 +6,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Scanner;
 
-class JSONgetter {
+public class JSONgetter {
     private String cityname;
-    JSONgetter(String name) {
+    public JSONgetter(String name) {
         this.cityname = name;
+    }
+    public JSONgetter() {
+        System.out.println("Please enter the city name:");
+        Scanner scanner = new Scanner(System.in);
+        this.cityname = scanner.next();
+        scanner.close();
     }
     String jsonReader(String mode) throws IOException {
         String jsonText = "";
@@ -23,5 +30,8 @@ class JSONgetter {
             }
         }
         return jsonText;
+    }
+    public String getCityname() {
+        return cityname;
     }
 }

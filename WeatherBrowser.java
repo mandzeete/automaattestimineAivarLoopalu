@@ -1,17 +1,15 @@
-import ilmaAPI.Filewritter;
-import ilmaAPI.WeatherApi;
-import ilmaAPI.Filereader;
-import ilmaAPI.WeatherBrowserInterface;
+import ilmaAPI.*;
 
 import java.io.IOException;
 import java.util.List;
 
-public class WeatherBrowser implements WeatherBrowserInterface{
+public class WeatherBrowser {
     public static void main(String[] args) throws IOException {
         Filereader reader = new Filereader("CityData.txt");
         List<String > list = reader.readline();
         for (String name:list) {
-            WeatherApi weatherApi = new WeatherApi(name);
+            JSONgetter getter = new JSONgetter(name);
+            WeatherApi weatherApi = new WeatherApi(getter);
             String city = weatherApi.cityGetter();
             Filewritter filewritter = new Filewritter(city);
 
@@ -23,7 +21,7 @@ public class WeatherBrowser implements WeatherBrowserInterface{
             filewritter.write(weatherApi.getCoordinates());
             filewritter.write("Maximum temperature for 3 days: " + maximumTemp);
             filewritter.write("Minimum temperature for 3 days: " + minimumTemp);
-            filewritter.write("Temperature at the moment: " + temperature);
+            filewritter.write("The temperature at the moment: " + temperature);
             filewritter.close();
 
             System.out.println(weatherApi.getCoordinates());
